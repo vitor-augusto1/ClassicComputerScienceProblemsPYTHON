@@ -125,6 +125,24 @@ class Queue(Generic[T]):
         return repr(self._container)
 
 
+def bfs(initial: T, goal_test: Callable[[T], bool], 
+        successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
+    frontier: Queue[Node[T]] = Queue()
+    frontier.push(Node(initial, None))
+    explored: Set[T] = {initial}
+    while not frontier.empty:
+        current_node: Node[T] = frontier.pop()
+        current_state: T = current_node.state
+        if goal_test(current_state):
+            return current_node
+        for child in successors(current_state):
+            if child in explored:
+                continue
+            explored.add(child)
+            frontier.push(Node(child, current_node))
+    return None
+
+
 if __name__ == "__main__":
     print(linear_contains([1, 5, 15, 15, 15, 15, 20], 5))
     print(binary_contains(['a', 'd', 'e', 'f', 'z'], 'f'))
