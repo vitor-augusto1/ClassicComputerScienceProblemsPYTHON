@@ -143,6 +143,24 @@ def bfs(initial: T, goal_test: Callable[[T], bool],
     return None
 
 
+class PriorityQueue(Generic[T]):
+    def __init__(self) -> None:
+        self._container: List[T] = []
+
+    @property
+    def empty(self) -> bool:
+        return not self._container
+
+    def push(self, item: T) -> None:
+        heappush(self._container, item)  # insert according to priority
+
+    def pop(self) -> T:
+        return heappop(self._container)  # remove according to priority
+
+    def __repr__(self) -> str:
+        return repr(self._container)
+
+
 if __name__ == "__main__":
     print(linear_contains([1, 5, 15, 15, 15, 15, 20], 5))
     print(binary_contains(['a', 'd', 'e', 'f', 'z'], 'f'))
