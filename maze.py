@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
 import random
 from math import sqrt
-from generic_search import dfs, bfs, Node, node_to_path
+from generic_search import astar, dfs, bfs, Node, node_to_path
 
 
 class Cell(str, Enum):
@@ -111,3 +111,13 @@ if __name__ == "__main__":
         m.mark(path2)
         print(m)
         m.clear(path2)
+    print("Third solution using A* search")
+    distance: Callable[[MazeLocation], float] = manhattan_distance(m.goal)
+    solution3: Optional[Node[MazeLocation]] = astar(m.start, m.goal_test,
+                                                    m.successors, distance)
+    if solution3 is None:
+        print("No solution found using A*!")
+    else:
+        path3: List[MazeLocation] = node_to_path(solution3)
+        m.mark(path3)
+        print(m)
