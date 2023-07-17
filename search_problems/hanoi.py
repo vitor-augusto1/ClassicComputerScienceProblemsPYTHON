@@ -41,4 +41,3 @@ if __name__ == '__main__':
     print(f"Tower A: {tower_a}")
     print(f"Tower B: {tower_b}")
     print(f"Tower C: {tower_c}")
-

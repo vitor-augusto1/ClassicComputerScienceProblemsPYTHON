@@ -56,3 +56,4 @@ def fib5(n: int) -> Generator[int, None, None]:
 if __name__ == '__main__':
     for i in fib5(50):
         print(i)
+        breakpoint()

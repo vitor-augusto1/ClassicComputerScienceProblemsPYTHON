@@ -176,7 +176,7 @@ def astar(initial: T, goal_test: Callable[[T], bool], sucessors: Callable[[T],
             new_cost: float = current_node.cost + 1
             if child not in explored or explored[child] > new_cost:
                 explored[child] = new_cost
-                frontier.push(Node(child, current_node, new_cost, heuristic))
+                frontier.push(Node(child, current_node, new_cost, heuristic()))
     return None
 
 
