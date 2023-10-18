@@ -1,5 +1,8 @@
-from typing import TypeVar, Generic, List
+from typing import Optional, TypeVar, Generic, List
 from edge import Edge
+import sys
+sys.path.insert(0, '../..')
+from search_problems.generic_search import bfs, Node, node_to_path
 
 V = TypeVar('V')  # Tipo dos vértices no grafo
 
@@ -89,3 +92,13 @@ if __name__ == "__main__":
     city_graph.add_edge_by_vertices("Riverside", "Chicago")
     ...
     print(city_graph)
+    bfs_result: Optional[Node[V]] = bfs("Chicago",
+                                        lambda x: x == "San Francisco",
+                                        city_graph.neighbors_for_vertex)
+    print(f"Neighbors for vertex: {city_graph.neighbors_for_vertex}")
+    if bfs_result is None:
+        print("No solution found using breadth-first search!")
+    else:
+        path: List[V] = node_to_path(bfs_result)
+        print("Path from Chicago to San Francisco: ")
+        print(path)
